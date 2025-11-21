@@ -1,0 +1,184 @@
+/* ===== PAYMENTS SCREEN ===== */
+
+.payments-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-lg);
+}
+
+.payment-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    transition: all var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+}
+
+.payment-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--primary);
+    transform: scaleX(0);
+    transition: transform var(--transition-normal);
+}
+
+.payment-card:hover {
+    border-color: var(--border-accent);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.payment-card:hover::before {
+    transform: scaleX(1);
+}
+
+.payment-card.overdue::before {
+    background: var(--error);
+    transform: scaleX(1);
+}
+
+.payment-card.paid {
+    opacity: 0.7;
+}
+
+.payment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--spacing-md);
+}
+
+.payment-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+}
+
+.payment-icon.electricity {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+}
+
+.payment-icon.water {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+}
+
+.payment-icon.gas {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+.payment-icon.internet {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+}
+
+.payment-icon.mobile {
+    background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.payment-status-badge {
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.payment-status-badge.paid {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--success);
+}
+
+.payment-status-badge.pending {
+    background: rgba(245, 158, 11, 0.1);
+    color: var(--warning);
+}
+
+.payment-status-badge.overdue {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--error);
+}
+
+.payment-content h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 var(--spacing-xs) 0;
+}
+
+.payment-provider {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin: 0 0 var(--spacing-sm) 0;
+}
+
+.payment-account {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    margin: 0 0 var(--spacing-md) 0;
+}
+
+.payment-amount {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-md);
+}
+
+.amount-label {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.amount-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.payment-due {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-md);
+}
+
+.payment-due i {
+    color: var(--text-muted);
+}
+
+.due-days {
+    color: var(--warning);
+    font-weight: 600;
+}
+
+.payment-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.payment-actions .btn-small {
+    flex: 1;
+}
+
+@media (max-width: 768px) {
+    .payments-grid {
+        grid-template-columns: 1fr;
+    }
+}
+

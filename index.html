@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DHIndus Banks - Digital Banking Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/transactions.css">
+    <link rel="stylesheet" href="css/accounts.css">
+    <link rel="stylesheet" href="css/payments.css">
+    <link rel="stylesheet" href="css/investments.css">
+    <link rel="stylesheet" href="css/cards.css">
+    <link rel="stylesheet" href="css/settings.css">
+    <link rel="stylesheet" href="css/notifications.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/futuristic.css">
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script src="https://accounts.google.com/gsi/client"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <div class="logo-circle">
+                    <img src="logo.jpg" alt="DHIndus Banks Logo" class="logo-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="logo-fallback" style="display: none;">
+                        <i class="fas fa-university"></i>
+                    </div>
+                </div>
+                <h1>DHIndus Banks</h1>
+            </div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+            <p class="loading-text">Initializing secure banking...</p>
+        </div>
+    </div>
+
+    <!-- Login Screen -->
+    <div id="login-screen" class="screen login-screen">
+        <div class="login-background">
+            <div class="particles"></div>
+            <div class="grid-overlay"></div>
+        </div>
+
+        <div class="login-container">
+            <div class="login-card">
+                <div class="login-layout">
+                    <!-- Left Side: Header, Description, Phase Indicator -->
+                    <div class="login-left">
+                        <div class="login-header">
+                            <div class="logo-container">
+                                <div class="logo">
+                                    <img src="logo.jpg" alt="DHIndus Banks Logo" class="logo-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                    <div class="logo-fallback" style="display: none;">
+                                        <i class="fas fa-university"></i>
+                                    </div>
+                                </div>
+                                <h1>DHIndus Banks</h1>
+                                <p>Digital Banking Platform</p>
+                            </div>
+                        </div>
+
+                        <!-- Bank Description Area -->
+                        <div class="bank-description">
+                            <h3>Welcome to DHIndus Banks</h3>
+                            <p>Your trusted partner for secure and innovative digital banking solutions. Experience seamless transactions, advanced security, and personalized financial services.</p>
+                            <div class="description-features">
+                                <div class="feature-item">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <span>256-bit Encryption</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>24/7 Banking</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-mobile-alt"></i>
+                                    <span>Mobile First</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Phase Indicator -->
+                        <!-- <div class="login-phase-indicator">
+                            <div class="phase-step active" data-phase="1">
+                                <div class="phase-number">1</div>
+                                <div class="phase-label">Identity</div>
+                            </div>
+                            <div class="phase-line"></div>
+                            <div class="phase-step" data-phase="2">
+                                <div class="phase-number">2</div>
+                                <div class="phase-label">Credentials</div>
+                            </div>
+                        </div> -->
+                    </div>
+
+                    <!-- Right Side: Form Content -->
+                    <div class="login-right">
+                        <form id="login-form" class="login-form">
+                            <!-- Phase 1: Username and Phone -->
+                            <div class="login-phase phase-1 active" id="login-phase-1">
+                                <div class="input-group">
+                                    <div class="input-container">
+                                        <i class="fas fa-user"></i>
+                                        <input type="text" id="username" placeholder="Username" required>
+                                        <div class="input-line"></div>
+                                    </div>
+                                </div>
+
+                                <div class="input-group">
+                                    <div class="input-container">
+                                        <i class="fas fa-phone"></i>
+                                        <input type="tel" id="phone" placeholder="Phone no." required>
+                                        <div class="input-line"></div>
+                                    </div>
+                                </div>
+
+                                <button type="button" class="login-btn phase-btn" id="next-phase-btn">
+                                    <span class="btn-text">Continue</span>
+                                    <span class="btn-icon"><i class="fas fa-arrow-right"></i></span>
+                                </button>
+                            </div>
+
+                            <!-- Phase 2: Email and Password -->
+                            <div class="login-phase phase-2" id="login-phase-2">
+                                <button type="button" class="back-phase-btn" id="back-phase-btn">
+                                    <i class="fas fa-arrow-left"></i>
+                                    <span>Back</span>
+                                </button>
+
+                                <div class="input-group">
+                                    <div class="input-container">
+                                        <i class="fas fa-envelope"></i>
+                                        <input type="email" id="email" placeholder="Email" required>
+                                        <div class="input-line"></div>
+                                    </div>
+                                </div>
+
+                                <div class="input-group">
+                                    <div class="input-container">
+                                        <i class="fas fa-lock"></i>
+                                        <input type="password" id="password" placeholder="Password" required>
+                                        <div class="input-line"></div>
+                                    </div>
+                                </div>
+
+                                <div class="login-options">
+                                    <label class="checkbox-container">
+                                        <input type="checkbox" id="remember">
+                                        <span class="checkmark"></span>
+                                        Remember me
+                                    </label>
+                                    <a href="#" class="forgot-password">Forgot Password?</a>
+                                </div>
+
+                                <button type="submit" class="login-btn">
+                                    <span class="btn-text">Login</span>
+                                    <span class="btn-icon"><i class="fas fa-arrow-right"></i></span>
+                                </button>
+                            </div>
+                        </form>
+
+                        <!-- <div class="login-footer">
+                            <p>Secure connection established</p>
+                            <div class="security-indicator">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>256-bit encryption</span>
+                            </div>
+                        </div> -->
+
+                        <div class="google-signin">
+                            <div class="divider">
+                                <span>Or continue with</span>
+                            </div>
+                            <button type="button" class="btn-google" id="google-signin-btn">
+                                <i class="fab fa-google"></i>
+                                <span>Google</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Dashboard -->
+    <div id="dashboard-screen" class="screen dashboard-screen hidden">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <div class="header-left">
+                <button class="menu-toggle" id="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="logo-header">
+                    <img src="logo.jpg" alt="DHIndus Banks Logo" class="logo-image-small" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="logo-fallback-small" style="display: none;">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <span>DHIndus Banks</span>
+                </div>
+            </div>
+
+            <div class="header-center">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search transactions, accounts..." id="global-search">
+                </div>
+            </div>
+
+            <div class="header-right">
+                <button class="icon-btn" id="notifications-btn" title="Notifications">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge">3</span>
+                </button>
+                <div class="user-menu" id="user-menu">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-info">
+                        <span class="user-name" id="user-name">User</span>
+                        <span class="user-role">Account Holder</span>
+                    </div>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </header>
+
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-screen="dashboard">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="nav-item" data-screen="accounts">
+                    <i class="fas fa-wallet"></i>
+                    <span>Accounts</span>
+                </a>
+                <a href="#" class="nav-item" data-screen="transactions">
+                    <i class="fas fa-exchange-alt"></i>
+                    <span>Transactions</span>
+                </a>
+                <a href="#" class="nav-item" data-screen="transfer">
+                    <i class="fas fa-paper-plane"></i>
+                    <span>Transfer Money</span>
+                </a>
+                <a href="#" class="nav-item" data-screen="payments">
+                    <i class="fas fa-credit-card"></i>
+                    <span>Payments</span>
+                </a>
+                <a href="#" class="nav-item" data-screen="investments">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Investments</span>
+                </a>
+                <a href="#" class="nav-item" data-screen="cards">
+                    <i class="fas fa-id-card"></i>
+                    <span>Cards</span>
+                </a>
+                <a href="#" class="nav-item" data-screen="settings">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="btn-logout" id="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-content" id="dashboard-content">
+            <!-- Dashboard Overview -->
+            <div class="content-section" id="dashboard-section">
+                <div class="section-header">
+                    <h2>Dashboard Overview</h2>
+                    <div class="header-actions">
+                        <button class="btn-secondary" id="refresh-btn">
+                            <i class="fas fa-sync-alt"></i>
+                            <span>Refresh</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Balance Cards -->
+                <div class="balance-cards">
+                    <div class="balance-card primary">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-wallet"></i>
+                            </div>
+                            <div class="card-menu">
+                                <button class="icon-btn-sm"><i class="fas fa-ellipsis-v"></i></button>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <p class="card-label">Total Balance</p>
+                            <h3 class="card-amount" id="total-balance">₹0.00</h3>
+                            <div class="card-change positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+12.5% from last month</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="balance-card">
+                        <div class="card-header">
+                            <div class="card-icon savings">
+                                <i class="fas fa-piggy-bank"></i>
+                            </div>
+                            <div class="card-menu">
+                                <button class="icon-btn-sm"><i class="fas fa-ellipsis-v"></i></button>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <p class="card-label">Savings Account</p>
+                            <h3 class="card-amount" id="savings-balance">₹0.00</h3>
+                            <div class="card-change">
+                                <i class="fas fa-arrow-right"></i>
+                                <span>Account: ****1234</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="balance-card">
+                        <div class="card-header">
+                            <div class="card-icon income">
+                                <i class="fas fa-arrow-down"></i>
+                            </div>
+                            <div class="card-menu">
+                                <button class="icon-btn-sm"><i class="fas fa-ellipsis-v"></i></button>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <p class="card-label">This Month Income</p>
+                            <h3 class="card-amount" id="month-income">₹0.00</h3>
+                            <div class="card-change positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+₹15,000 this month</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="balance-card">
+                        <div class="card-header">
+                            <div class="card-icon expense">
+                                <i class="fas fa-arrow-up"></i>
+                            </div>
+                            <div class="card-menu">
+                                <button class="icon-btn-sm"><i class="fas fa-ellipsis-v"></i></button>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <p class="card-label">This Month Expenses</p>
+                            <h3 class="card-amount" id="month-expense">₹0.00</h3>
+                            <div class="card-change negative">
+                                <i class="fas fa-arrow-down"></i>
+                                <span>-₹8,500 this month</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions-section">
+                    <h3>Quick Actions</h3>
+                    <div class="quick-actions-grid">
+                        <button class="action-card" data-action="transfer">
+                            <div class="action-icon transfer">
+                                <i class="fas fa-paper-plane"></i>
+                            </div>
+                            <span>Transfer Money</span>
+                        </button>
+                        <button class="action-card" data-action="deposit">
+                            <div class="action-icon deposit">
+                                <i class="fas fa-plus-circle"></i>
+                            </div>
+                            <span>Deposit</span>
+                        </button>
+                        <button class="action-card" data-action="withdraw">
+                            <div class="action-icon withdraw">
+                                <i class="fas fa-minus-circle"></i>
+                            </div>
+                            <span>Withdraw</span>
+                        </button>
+                        <button class="action-card" data-action="pay-bills">
+                            <div class="action-icon bills">
+                                <i class="fas fa-file-invoice-dollar"></i>
+                            </div>
+                            <span>Pay Bills</span>
+                        </button>
+                        <button class="action-card" data-action="invest">
+                            <div class="action-icon invest">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <span>Invest</span>
+                        </button>
+                        <button class="action-card" data-action="cards">
+                            <div class="action-icon cards">
+                                <i class="fas fa-credit-card"></i>
+                            </div>
+                            <span>Manage Cards</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Recent Transactions -->
+                <div class="transactions-section">
+                    <div class="section-header">
+                        <h3>Recent Transactions</h3>
+                        <a href="#" class="view-all-link" data-screen="transactions">View All</a>
+                    </div>
+                    <div class="transactions-list" id="recent-transactions">
+                        <!-- Transactions will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Account Summary Chart -->
+                <div class="chart-section">
+                    <div class="section-header">
+                        <h3>Account Summary</h3>
+                        <div class="chart-controls">
+                            <button class="chart-btn active" data-period="week">Week</button>
+                            <button class="chart-btn" data-period="month">Month</button>
+                            <button class="chart-btn" data-period="year">Year</button>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="account-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Accounts Section -->
+            <div class="content-section hidden" id="accounts-section">
+                <div class="section-header">
+                    <h2>My Accounts</h2>
+                    <button class="btn-primary" id="add-account-btn">
+                        <i class="fas fa-plus"></i>
+                        <span>Add Account</span>
+                    </button>
+                </div>
+                <div class="accounts-grid" id="accounts-grid">
+                    <!-- Accounts will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Transactions Section -->
+            <div class="content-section hidden" id="transactions-section">
+                <div class="section-header">
+                    <h2>Transaction History</h2>
+                    <div class="header-actions">
+                        <select class="filter-select" id="transaction-filter">
+                            <option value="all">All Transactions</option>
+                            <option value="income">Income</option>
+                            <option value="expense">Expenses</option>
+                            <option value="transfer">Transfers</option>
+                        </select>
+                        <button class="btn-secondary" id="export-transactions">
+                            <i class="fas fa-download"></i>
+                            <span>Export</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="transactions-table-container">
+                    <table class="transactions-table" id="transactions-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>Category</th>
+                                <th>Amount</th>
+                                <th>Balance</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transactions-tbody">
+                            <!-- Transactions will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Transfer Money Section -->
+            <div class="content-section hidden" id="transfer-section">
+                <div class="section-header">
+                    <h2>Transfer Money</h2>
+                </div>
+                <div class="transfer-container">
+                    <form id="transfer-form" class="transfer-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="from-account">From Account</label>
+                                <select id="from-account" class="form-input" required>
+                                    <option value="">Select Account</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="to-account">To Account</label>
+                                <input type="text" id="to-account" class="form-input" placeholder="Account number or name" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="transfer-amount">Amount (₹)</label>
+                            <input type="number" id="transfer-amount" class="form-input" placeholder="0.00" min="0.01" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="transfer-notes">Notes (Optional)</label>
+                            <textarea id="transfer-notes" class="form-input" rows="3" placeholder="Add a note for this transaction"></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary btn-large">
+                            <i class="fas fa-paper-plane"></i>
+                            <span>Transfer Money</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Payments Section -->
+            <div class="content-section hidden" id="payments-section">
+                <div class="section-header">
+                    <h2>Bill Payments</h2>
+                    <button class="btn-primary" id="add-bill-btn">
+                        <i class="fas fa-plus"></i>
+                        <span>Pay Bill</span>
+                    </button>
+                </div>
+                <div class="payments-grid" id="payments-grid">
+                    <!-- Payment cards will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Investments Section -->
+            <div class="content-section hidden" id="investments-section">
+                <div class="section-header">
+                    <h2>Investments</h2>
+                    <button class="btn-primary" id="add-investment-btn">
+                        <i class="fas fa-plus"></i>
+                        <span>Add Investment</span>
+                    </button>
+                </div>
+                <div class="investments-container">
+                    <div class="investments-summary">
+                        <div class="summary-card">
+                            <div class="summary-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="summary-content">
+                                <p class="summary-label">Total Investments</p>
+                                <h3 class="summary-value" id="total-investments">₹0.00</h3>
+                            </div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="summary-icon income">
+                                <i class="fas fa-arrow-up"></i>
+                            </div>
+                            <div class="summary-content">
+                                <p class="summary-label">Returns</p>
+                                <h3 class="summary-value" id="investment-returns">₹0.00</h3>
+                            </div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="summary-icon">
+                                <i class="fas fa-percentage"></i>
+                            </div>
+                            <div class="summary-content">
+                                <p class="summary-label">ROI</p>
+                                <h3 class="summary-value" id="investment-roi">0%</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="investments-list" id="investments-list">
+                        <!-- Investments will be loaded here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cards Section -->
+            <div class="content-section hidden" id="cards-section">
+                <div class="section-header">
+                    <h2>My Cards</h2>
+                    <button class="btn-primary" id="add-card-btn">
+                        <i class="fas fa-plus"></i>
+                        <span>Add Card</span>
+                    </button>
+                </div>
+                <div class="cards-grid" id="cards-grid">
+                    <!-- Cards will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Settings Section -->
+            <div class="content-section hidden" id="settings-section">
+                <div class="section-header">
+                    <h2>Settings</h2>
+                </div>
+                <div class="settings-container">
+                    <div class="settings-section">
+                        <h3>Account Settings</h3>
+                        <div class="settings-group">
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <label>Display Name</label>
+                                    <p>Change your display name</p>
+                                </div>
+                                <input type="text" id="display-name" class="form-input" placeholder="Your name">
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <label>Email</label>
+                                    <p>Your registered email address</p>
+                                </div>
+                                <input type="email" id="user-email" class="form-input" placeholder="email@example.com" readonly>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <label>Currency</label>
+                                    <p>Default currency for transactions</p>
+                                </div>
+                                <select id="currency-select" class="form-input">
+                                    <option value="INR">₹ Indian Rupee (INR)</option>
+                                    <option value="USD">$ US Dollar (USD)</option>
+                                    <option value="EUR">€ Euro (EUR)</option>
+                                    <option value="GBP">£ British Pound (GBP)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3>Security</h3>
+                        <div class="settings-group">
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <label>Change Password</label>
+                                    <p>Update your account password</p>
+                                </div>
+                                <button class="btn-secondary" id="change-password-btn">Change Password</button>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <label>Two-Factor Authentication</label>
+                                    <p>Add an extra layer of security</p>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="2fa-toggle">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <label>Login Notifications</label>
+                                    <p>Get notified when someone logs into your account</p>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="login-notifications-toggle" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3>Preferences</h3>
+                        <div class="settings-group">
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <label>Theme</label>
+                                    <p>Choose your preferred theme</p>
+                                </div>
+                                <select id="theme-select" class="form-input">
+                                    <option value="dark">Dark</option>
+                                    <option value="light">Light</option>
+                                    <option value="auto">Auto</option>
+                                </select>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <label>Language</label>
+                                    <p>Select your preferred language</p>
+                                </div>
+                                <select id="language-select" class="form-input">
+                                    <option value="en">English</option>
+                                    <option value="hi">हिंदी (Hindi)</option>
+                                </select>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <label>Date Format</label>
+                                    <p>How dates are displayed</p>
+                                </div>
+                                <select id="date-format-select" class="form-input">
+                                    <option value="DD/MM/YYYY">DD/MM/YYYY</option>
+                                    <option value="MM/DD/YYYY">MM/DD/YYYY</option>
+                                    <option value="YYYY-MM-DD">YYYY-MM-DD</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3>Data & Privacy</h3>
+                        <div class="settings-group">
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <label>Export Data</label>
+                                    <p>Download all your banking data</p>
+                                </div>
+                                <button class="btn-secondary" id="export-data-btn">Export Data</button>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <label>Delete Account</label>
+                                    <p>Permanently delete your account and all data</p>
+                                </div>
+                                <button class="btn-danger" id="delete-account-btn">Delete Account</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div id="modal-overlay" class="modal-overlay hidden">
+        <div class="modal" id="modal">
+            <div class="modal-header">
+                <h3 id="modal-title">Modal Title</h3>
+                <button class="modal-close" id="modal-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <!-- Modal content -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Notifications Panel -->
+    <div id="notifications-panel" class="notifications-panel hidden">
+        <div class="notifications-header">
+            <h3>Notifications</h3>
+            <div class="notifications-actions">
+                <button class="icon-btn-sm" id="mark-all-read" title="Mark all as read">
+                    <i class="fas fa-check-double"></i>
+                </button>
+                <button class="icon-btn-sm" id="close-notifications" title="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="notifications-list" id="notifications-list">
+            <!-- Notifications will be loaded here -->
+        </div>
+        <div class="notifications-empty" id="notifications-empty">
+            <i class="fas fa-bell-slash"></i>
+            <p>No notifications</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/googleSheets.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/notifications.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/transactions.js"></script>
+    <script src="js/accounts.js"></script>
+    <script src="js/payments.js"></script>
+    <script src="js/investments.js"></script>
+    <script src="js/cards.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/charts.js"></script>
+</body>
+</html>
+
